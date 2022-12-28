@@ -2,8 +2,7 @@ import { Inject, Controller, Get, Query } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/koa';
 import { ApiResponse } from '@midwayjs/swagger';
 import { UserService } from '../service/user.service';
-import { RoleVO } from './role.vo';
-import { UserVO } from './user.vo';
+import { RoleVO, UserVO } from './api.vo';
 
 @Controller('/api')
 export class APIController {
@@ -17,7 +16,7 @@ export class APIController {
     type: UserVO,
   })
   @Get('/get_user')
-  async getUser(@Query('uid') uid) {
+  async getUser(@Query('uid') uid: number) {
     const user = await this.userService.getUser({ uid });
     return { success: true, message: 'OK', data: user };
   }
